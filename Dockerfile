@@ -31,8 +31,8 @@ RUN $COMPOSER_COMMAND global require hirak/prestissimo:^0.3 \
  && $COMPOSER_COMMAND global require roave/security-advisories:dev-master
 
 USER root
-COPY php-settings.conf /usr/local/etc/php-fpm.d/
 
+COPY php-settings.conf /usr/local/etc/php-fpm.d/
 
 COPY --from=node /usr/local/include/node /usr/local/include/node
 COPY --from=node /usr/local/share/systemtap/tapset/node.stp /usr/local/share/systemtap/tapset/node.stp
