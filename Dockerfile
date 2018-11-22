@@ -40,7 +40,9 @@ COPY --from=node /usr/local/share/systemtap/tapset/node.stp /usr/local/share/sys
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
-    ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx &&
+    ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx && \
+    curl -o- -L https://yarnpkg.com/install.sh | sh && \
+    ln -s `yarn global bin` /usr/local/bin/
 
 USER www-data
 
