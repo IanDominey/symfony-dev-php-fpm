@@ -10,7 +10,7 @@ VOLUME /app
 WORKDIR /app
 
 RUN set -xe \
- && apk add --no-cache git openssh-client coreutils freetype-dev libjpeg-turbo-dev libltdl libpng-dev icu icu-libs icu-dev unzip \
+ && apk add --no-cache git openssh-client coreutils freetype-dev libjpeg-turbo-dev libltdl libpng-dev icu icu-libs icu-dev unzip yarn \
  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
  && docker-php-ext-install -j$(nproc) iconv mbstring intl gd zip mysqli pdo pdo_mysql \
  && apk add --no-cache --virtual build-deps g++ autoconf make python linux-headers \
@@ -40,8 +40,7 @@ COPY --from=node /usr/local/share/systemtap/tapset/node.stp /usr/local/share/sys
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
-    ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx && \
-    npm install -g yarn
+    ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx &&
 
 USER www-data
 
