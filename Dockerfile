@@ -1,4 +1,4 @@
-FROM node:10-alpine AS node
+FROM node:alpine AS node
 
 FROM php:7-fpm-alpine
 
@@ -10,7 +10,7 @@ VOLUME /app
 WORKDIR /app
 
 RUN set -xe \
- && apk add --no-cache git openssh-client coreutils freetype-dev libjpeg-turbo-dev libltdl libpng-dev icu icu-libs icu-dev unzip yarn \
+ && apk add --no-cache git openssh-client coreutils freetype-dev libjpeg-turbo-dev libltdl libpng-dev icu icu-libs icu-dev unzip yarn libzip-dev \
  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
  && docker-php-ext-install -j$(nproc) iconv mbstring intl gd zip pdo_mysql \
  && apk add --no-cache --virtual build-deps g++ autoconf make python linux-headers \
